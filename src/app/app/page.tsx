@@ -28,6 +28,7 @@ export default async function Dashboard() {
         .select("description, amount, tx_date")
         .eq("user_id", user.id)
         .eq("is_recurring", true)
+        .eq("category", "abonnementer") // jegeren jakter abonnementer, ikke husleie og avdrag
         .lt("amount", 0)
         .order("tx_date", { ascending: false })
         .limit(200),

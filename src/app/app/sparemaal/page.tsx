@@ -24,6 +24,7 @@ export default async function SparemaalSide() {
       .select("description, amount")
       .eq("user_id", user.id)
       .eq("is_recurring", true)
+      .eq("category", "abonnementer") // anbefal kutt i abonnementer, aldri husleie o.l.
       .lt("amount", 0)
       .limit(100),
   ]);

@@ -6,19 +6,6 @@
 -- Hjelpefunksjoner
 -- ============================================================
 
-create or replace function public.is_admin()
-returns boolean
-language sql
-security definer
-set search_path = public
-stable
-as $$
-  select coalesce(
-    (select p.is_admin from public.profiles p where p.id = auth.uid()),
-    false
-  );
-$$;
-
 -- ============================================================
 -- Profiler
 -- ============================================================
@@ -50,6 +37,19 @@ create policy "profiles: oppdater egen" on public.profiles
 -- gir seg selv admin via direkte API-kall mot databasen.
 revoke update on public.profiles from authenticated;
 grant update (full_name, onboarding_focus) on public.profiles to authenticated;
+
+create or replace function public.is_admin()
+returns boolean
+language sql
+security definer
+set search_path = public
+stable
+as $$
+  select coalesce(
+    (select p.is_admin from public.profiles p where p.id = auth.uid()),
+    false
+  );
+$$;
 
 -- Opprett profil + varslingsinnstillinger automatisk ved registrering
 create or replace function public.handle_new_user()
