@@ -1,26 +1,88 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/*
+  Kronekontroll designsystem.
+  Lyst, rolig og trygt: varm hvit bakgrunn, dyp blågrønn primærfarge (tillit),
+  varm terrakotta-aksent brukt sparsomt. Alle farger defineres her og kun her.
+*/
+@theme {
+  --color-bakgrunn: #faf9f5;
+  --color-flate: #ffffff;
+  --color-flate-demp: #f2f0e9;
+  --color-blekk: #1c2b28;
+  --color-demp: #5b6a66;
+  --color-linje: #e6e3da;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-primar: #0e5f58;
+  --color-primar-mork: #0a453f;
+  --color-primar-lys: #e2efec;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-aksent: #d96e48;
+  --color-aksent-lys: #fbe9e1;
+
+  --color-positiv: #2f7d4f;
+  --color-positiv-lys: #e4f2e9;
+  --color-varsel: #b3701c;
+  --color-varsel-lys: #fbf0dd;
+  --color-negativ: #b3402f;
+  --color-negativ-lys: #f9e7e3;
+
+  --font-sans: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-bricolage), var(--font-figtree), ui-sans-serif, sans-serif;
+
+  --radius-kort: 1rem;
+  --shadow-kort: 0 1px 2px rgb(28 43 40 / 0.04), 0 8px 24px -12px rgb(28 43 40 / 0.12);
+  --shadow-svev: 0 2px 4px rgb(28 43 40 / 0.06), 0 16px 40px -16px rgb(28 43 40 / 0.18);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-bakgrunn);
+  color: var(--color-blekk);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  letter-spacing: -0.015em;
+}
+
+::selection {
+  background-color: var(--color-primar-lys);
+  color: var(--color-primar-mork);
+}
+
+/* Synlig fokus for tastaturnavigasjon (WCAG 2.1 AA) */
+:focus-visible {
+  outline: 2px solid var(--color-primar);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Diskret inntoning brukt på kort og seksjoner */
+@keyframes ktr-inn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ktr-inn {
+  animation: ktr-inn 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
