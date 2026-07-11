@@ -15,8 +15,9 @@ const securityHeaders = [
     key: "Content-Security-Policy",
     value: [
       "default-src 'self'",
-      // Next.js trenger inline styles (styled-jsx/tailwind) og inline scripts for hydrering
-      "script-src 'self' 'unsafe-inline'",
+      // Next.js trenger inline styles (styled-jsx/tailwind) og inline scripts for hydrering.
+      // 'unsafe-eval' er KUN for dev-modus (React devtools) - aldri i produksjon.
+      `script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : ""}`,
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: blob:",
       "font-src 'self' data:",
@@ -30,6 +31,8 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  // Flere lockfiler finnes oppover i mappetreet; pin roten eksplisitt
+  turbopack: { root: __dirname },
   async headers() {
     return [{ source: "/(.*)", headers: securityHeaders }];
   },
