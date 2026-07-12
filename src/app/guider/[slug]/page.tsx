@@ -82,6 +82,28 @@ export default async function GuideSide({
             </Link>
           </aside>
         </article>
+
+        {/* Intern lenking: to beslektede guider */}
+        <aside className="mt-12" aria-labelledby="les-ogsaa">
+          <h2 id="les-ogsaa" className="text-xl font-semibold">
+            Les også
+          </h2>
+          <div className="mt-4 grid gap-4 sm:grid-cols-2">
+            {guides
+              .filter((g) => g.slug !== guide.slug)
+              .slice(0, 2)
+              .map((g) => (
+                <Link
+                  key={g.slug}
+                  href={`/guider/${g.slug}`}
+                  className="rounded-kort border border-linje bg-flate p-5 shadow-kort transition-shadow hover:shadow-svev"
+                >
+                  <p className="font-semibold">{g.title}</p>
+                  <p className="mt-1.5 text-sm leading-relaxed text-demp">{g.description}</p>
+                </Link>
+              ))}
+          </div>
+        </aside>
       </main>
       <MarketingFooter />
 

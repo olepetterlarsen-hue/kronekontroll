@@ -1,5 +1,4 @@
 import { NextRequest } from "next/server";
-import { env } from "@/lib/env";
 import { fristVarselHtml, sendVarsel, sparemaalHtml } from "@/lib/epost";
 import { createAdminClient } from "@/lib/supabase/admin";
 
@@ -12,8 +11,10 @@ export const maxDuration = 300;
  * så en re-kjøring samme dag sender aldri dobbelt.
  */
 export async function GET(request: NextRequest) {
+  // Defensivt: mangler hemmeligheten i miljøet skal svaret være 401, ikke 500
+  const secret = process.env.CRON_SECRET;
   const auth = request.headers.get("authorization");
-  if (auth !== `Bearer ${env.cronSecret()}`) {
+  if (!secret || auth !== `Bearer ${secret}`) {
     return new Response("Unauthorized", { status: 401 });
   }
 
@@ -74,7 +75,7 @@ export async function GET(request: NextRequest) {
 
     await sendVarsel({
       til: mottaker,
-      emne: milepæl >= 100 ? `Sparemål nådd: ${m.name}` : `Halvveis til ${m.name}!`,
+      emne: milepæl >= 100 ? `Sparemål nådd: ${m.name}` : `${Math.min(prosent, 99)} % av veien til ${m.name}!`,
       htmlInnhold: sparemaalHtml(m.name, Math.min(prosent, 100)),
       kanAvmeldes: true,
     });

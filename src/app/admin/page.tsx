@@ -59,7 +59,7 @@ export default async function AdminSide() {
         </Link>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-4">
+      <div className="grid gap-4 grid-cols-2 lg:grid-cols-4">
         <StatKort tittel="Brukere" verdi={String(alleBrukere.count ?? 0)} />
         <StatKort
           tittel="Betalende"

@@ -16,7 +16,7 @@ const beskrivelse =
   "Se hvor pengene lekker, stopp gjeld før det blir inkasso, og nå sparemålene dine. Last opp kontoutskriften - Kronekontroll gjør resten. Prøv gratis i 14 dager.";
 
 export const metadata: Metadata = {
-  title: `${site.name} - få kontroll på pengene dine for 49 kr i måneden`,
+  title: { absolute: `${site.name} - kontroll på pengene for 49 kr/mnd` },
   description: beskrivelse,
   alternates: { canonical: "/" },
 };
@@ -64,7 +64,7 @@ const FUNKSJONER = [
   },
   {
     ikon: <IkonSparemaal />,
-    tittel: "Sparemål som faktisk nås",
+    tittel: "Sparemål med synlig fremdrift",
     tekst:
       "Sett mål, følg fremdriften automatisk, og få konkrete forslag til hva som får deg raskere i mål.",
   },
@@ -72,7 +72,7 @@ const FUNKSJONER = [
     ikon: <IkonVarsel />,
     tittel: "Varsler før det haster",
     tekst:
-      "E-post når en frist nærmer seg og når et sparemål passeres. Aldri mas, alltid i tide.",
+      "E-post når en frist nærmer seg og når et sparemål passeres. Aldri mas, bare det som haster.",
   },
 ];
 
@@ -80,7 +80,7 @@ const INKASSO_STADIER = ["Purring", "Inkassovarsel", "Betalingsoppfordring", "An
 
 const TRYGGHET = [
   ["Norsk tjeneste", "Bygget for norske banker, norsk inkassolovgivning og norske lommebøker."],
-  ["Lagret i EU", "Dataene dine ligger kryptert i EU og deles aldri med tredjeparter."],
+  ["Lagret i EU", "Dataene dine ligger kryptert i EU og selges eller deles aldri med andre for deres egne formål."],
   ["Du eier dataene", "Last ned alt eller slett kontoen med ett klikk, når som helst."],
   ["Ingen sporing", "Ingen tredjeparts annonsesporing. Du er kunden, ikke produktet."],
 ] as const;
@@ -100,7 +100,7 @@ const FAQ = [
   },
   {
     sp: "Hvilke banker støttes?",
-    sv: "Alle. Du laster opp kontoutskrift som PDF eller CSV, som alle norske banker tilbyr. Automatisk banksynk kommer som valgfritt tillegg senere.",
+    sv: "Alle. Du laster opp kontoutskrift som PDF eller CSV, som alle norske banker tilbyr. Automatisk banksynk vurderes som valgfritt tillegg senere.",
   },
   {
     sp: "Hva skjer med dataene mine hvis jeg sier opp?",
@@ -127,7 +127,7 @@ export default function Landingsside() {
               </h1>
               <p className="ktr-inn mt-6 max-w-xl text-lg leading-relaxed text-demp">
                 Last opp kontoutskrifter, inkassobrev og låneavtaler. Kronekontroll viser hvor
-                pengene lekker, stopper gjeld før den vokser, og skriver e-postene du gruer deg
+                pengene lekker, hjelper deg å stoppe gjeld før den vokser, og skriver e-postene du gruer deg
                 til.
               </p>
               <div className="ktr-inn mt-8 flex flex-wrap items-center gap-4">
@@ -247,13 +247,13 @@ export default function Landingsside() {
                     <span
                       aria-hidden
                       className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-bold ${
-                        i < 2 ? "bg-aksent text-white" : "bg-white/10 text-white/60"
+                        i < 2 ? "bg-aksent-lys text-primar-mork" : "bg-white/10 text-white/60"
                       }`}
                     >
                       {i + 1}
                     </span>
                     <span className={`h-1.5 flex-1 rounded-full ${i < 2 ? "bg-aksent" : "bg-white/10"}`} />
-                    <span className={`w-44 text-sm ${i < 2 ? "font-semibold" : "text-white/60"}`}>
+                    <span className={`w-32 text-sm sm:w-44 ${i < 2 ? "font-semibold" : "text-white/60"}`}>
                       {stadium}
                     </span>
                   </li>

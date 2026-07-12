@@ -51,7 +51,7 @@ export default async function SparemaalSide() {
       {aktive.length === 0 && fullførte.length === 0 ? (
         <TomTilstand
           tittel="Ingen sparemål ennå"
-          tekst="Buffer, ferie eller egenkapital? Sett det første målet under - folk med konkrete mål sparer mer."
+          tekst="Buffer, ferie eller egenkapital? Sett det første målet under - et konkret mål gjør det lettere å spare."
         />
       ) : (
         <div className="grid gap-4 sm:grid-cols-2">

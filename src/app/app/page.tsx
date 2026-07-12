@@ -95,7 +95,7 @@ export default async function Dashboard() {
         />
       ) : (
         <>
-          <div className="grid gap-4 sm:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <StatKort tittel="Forbruk denne måneden" verdi={kr(totalForbruk)} />
             <StatKort
               tittel="Faste trekk funnet"

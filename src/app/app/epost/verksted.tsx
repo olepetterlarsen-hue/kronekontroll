@@ -19,7 +19,7 @@ const MALER: { id: MalType; navn: string; hint: string }[] = [
   },
   {
     id: "rentenedsettelse",
-    navn: "Forhandle ned renta",
+    navn: "Forhandle ned renten",
     hint: "Til banken. Oppgi lånetype, dagens rente og gjerne hva konkurrenter tilbyr.",
   },
   {
@@ -137,7 +137,7 @@ function Verksted({ tidligere }: { tidligere: Tidligere[] }) {
         </Kort>
       </div>
 
-      <div className="space-y-5">
+      <div className="space-y-5" aria-live="polite">
         {resultat ? (
           <Kort>
             <div className="flex items-center justify-between">

@@ -14,13 +14,13 @@ export default function Personvern() {
       <Avsnitt tittel="Kort fortalt">
         <p>
           Du laster opp økonomiske dokumenter for at Kronekontroll skal hjelpe deg. Dataene er dine:
-          vi lagrer dem kryptert i EU, deler dem aldri med andre, bruker dem ikke til annet enn å gi
+          vi lagrer dem kryptert i EU, selger dem aldri, deler dem aldri med andre for deres egne formål, og bruker dem ikke til annet enn å gi
           deg tjenesten, og du kan laste ned eller slette alt selv, når som helst.
         </p>
       </Avsnitt>
       <Avsnitt tittel="Behandlingsansvarlig">
         <p>
-          Kronekontroll (selskapsinformasjon oppdateres ved lansering) er behandlingsansvarlig.
+          Behandlingsansvarlig er Echoo AS (org.nr 935 228 387), som utvikler og drifter Kronekontroll. Ved overføring til eget selskap oppdateres denne erklæringen og du varsles på e-post.
           Spørsmål om personvern: {site.supportEmail}.
         </p>
       </Avsnitt>
@@ -52,8 +52,8 @@ export default function Personvern() {
       <Avsnitt tittel="Lagring og sletting">
         <p>
           Data lagres så lenge du har konto. Sletter du kontoen (Innstillinger → Slett kontoen min),
-          slettes alt umiddelbart: dokumenter, uttrukne data, profil og betalingsprofil. Vi purrer
-          ikke og beholder ingen skyggekopier.
+          slettes alt umiddelbart fra tjenesten: dokumenter, uttrukne data, profil og betalingsprofil.
+          Data i tekniske sikkerhetskopier roteres ut innen 30 dager.
         </p>
       </Avsnitt>
       <Avsnitt tittel="Dine rettigheter">

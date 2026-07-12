@@ -75,11 +75,13 @@ function simuler(gjeld: GjeldPost[], budsjett: number, strategi: Strategi) {
     strategi === "snoball" ? a.principal - b.principal : b.interestRate - a.interestRate,
   );
   const saldoer = new Map(rekkefolge.map((g) => [g.id, g.principal]));
+  const totalSaldo = () => [...saldoer.values()].reduce((s, v) => s + Math.max(0, v), 0);
   let måneder = 0;
   let totaleRenter = 0;
 
-  while ([...saldoer.values()].some((s) => s > 0) && måneder < 600) {
+  while (totalSaldo() > 0 && måneder < 600) {
     måneder++;
+    const saldoFørMåneden = totalSaldo();
     // Renter påløper på alle poster
     for (const g of rekkefolge) {
       const saldo = saldoer.get(g.id)!;
@@ -98,10 +100,17 @@ function simuler(gjeld: GjeldPost[], budsjett: number, strategi: Strategi) {
       saldoer.set(g.id, saldo - betaling);
       igjen -= betaling;
     }
-    // Hvis budsjettet ikke engang dekker rentene, gir vi beskjed
-    if (igjen === budsjett) return { klarerIkke: true as const, måneder: 0, totaleRenter: 0 };
+    // Hvis gjelden ikke sank denne måneden, dekker ikke budsjettet rentene -
+    // da finnes ingen gjeldfri-dato, og vi sier tydelig fra i stedet.
+    if (totalSaldo() >= saldoFørMåneden) {
+      return { klarerIkke: true as const, måneder: 0, totaleRenter: 0 };
+    }
   }
 
+  if (totalSaldo() > 0) {
+    // 600-månederstaket nådd uten å bli gjeldfri
+    return { klarerIkke: true as const, måneder: 0, totaleRenter: 0 };
+  }
   return { klarerIkke: false as const, måneder, totaleRenter: Math.round(totaleRenter) };
 }
 
@@ -123,6 +132,7 @@ export function Nedbetalingsplan({ gjeld }: { gjeld: GjeldPost[] }) {
   const gjeldfriDato = useMemo(() => {
     if (resultat.klarerIkke) return null;
     const d = new Date();
+    d.setDate(1); // unngå månedsoverflyt (31. jan + 1 mnd ville blitt 3. mars)
     d.setMonth(d.getMonth() + resultat.måneder);
     return d;
   }, [resultat]);
@@ -131,11 +141,11 @@ export function Nedbetalingsplan({ gjeld }: { gjeld: GjeldPost[] }) {
     <Kort>
       <div className="flex flex-wrap items-center justify-between gap-3">
         <h3 className="font-semibold">Nedbetalingsplan</h3>
-        <div role="group" aria-label="Velg strategi" className="flex rounded-full border border-linje p-0.5">
+        <div role="group" aria-label="Velg strategi" className="grid w-full grid-cols-2 rounded-full border border-linje p-0.5 sm:flex sm:w-auto">
           {(
             [
-              ["skred", "Skred (høyest rente først)"],
-              ["snoball", "Snøball (minst gjeld først)"],
+              ["skred", "Skred · dyrest først"],
+              ["snoball", "Snøball · minst først"],
             ] as const
           ).map(([verdi, navn]) => (
             <button
@@ -205,13 +215,13 @@ export function Nedbetalingsplan({ gjeld }: { gjeld: GjeldPost[] }) {
           .map((g, i) => (
             <li
               key={g.id}
-              className="flex items-center justify-between gap-3 rounded-xl bg-flate-demp/60 px-4 py-2.5 text-sm"
+              className="flex flex-wrap items-center justify-between gap-3 rounded-xl bg-flate-demp/60 px-4 py-2.5 text-sm"
             >
-              <span className="flex items-center gap-3">
-                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primar text-xs font-bold text-white">
+              <span className="flex min-w-0 items-center gap-3">
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primar text-xs font-bold text-white">
                   {i + 1}
                 </span>
-                <span className="font-medium">{g.creditor}</span>
+                <span className="min-w-0 truncate font-medium">{g.creditor}</span>
               </span>
               <span className="flex items-center gap-4">
                 <span className="tabular-nums text-demp">

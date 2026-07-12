@@ -25,7 +25,7 @@ export function MaalKort({ maal, anbefaling }: { maal: Maal; anbefaling?: string
     <Kort>
       <div className="flex items-start justify-between gap-3">
         <div>
-          <h3 className="font-semibold">{maal.name}</h3>
+          <h2 className="font-semibold">{maal.name}</h2>
           <p className="mt-0.5 text-sm text-demp">
             {kr(maal.saved_amount)} av {kr(maal.target_amount)}
             {maal.target_date ? ` · innen ${datoKort(maal.target_date)}` : ""}

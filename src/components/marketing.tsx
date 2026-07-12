@@ -23,6 +23,9 @@ export function MarketingHeader() {
           <Link href="/guider" className="hover:text-blekk">Guider</Link>
         </nav>
         <div className="flex items-center gap-3">
+          <Link href="/guider" className="text-sm font-medium text-demp hover:text-blekk sm:hidden">
+            Guider
+          </Link>
           <Link href="/logg-inn" className="text-sm font-semibold text-blekk hover:text-primar">
             Logg inn
           </Link>
@@ -47,7 +50,7 @@ export function MarketingFooter() {
             <Logo />
             <p className="mt-3 max-w-xs text-sm text-demp">
               Norsk tjeneste for folk som vil ha kontroll på pengene sine. Dataene dine lagres i EU
-              og deles aldri.
+              og selges eller deles aldri med andre for deres egne formål.
             </p>
           </div>
           <div>

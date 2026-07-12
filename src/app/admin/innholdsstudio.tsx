@@ -84,7 +84,7 @@ export function Innholdsstudio({ kø }: { kø: KøPost[] }) {
               {PLATTFORMER.map((p) => (
                 <label
                   key={p.id}
-                  className={`cursor-pointer rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors ${
+                  className={`cursor-pointer rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-primar ${
                     valgte.includes(p.id)
                       ? "border-primar bg-primar-lys text-primar-mork"
                       : "border-linje text-demp"

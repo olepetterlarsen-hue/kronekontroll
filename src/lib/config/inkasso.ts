@@ -47,7 +47,7 @@ export function kontrollerInkassokrav(krav: {
   if (krav.purregebyr > s.maksPurregebyr) {
     flagg.push({
       kode: "hoyt_purregebyr",
-      tekst: `Purregebyret (${krav.purregebyr} kr) er høyere enn maksgebyret på ${s.maksPurregebyr} kr per purring. Sjekk om det er lagt på flere gebyrer enn tillatt.`,
+      tekst: `Purregebyret (${krav.purregebyr} kr) er høyere enn maksgebyret per ${s.sistOppdatert} (${s.maksPurregebyr} kr per purring). Sjekk om det er lagt på flere gebyrer enn tillatt.`,
     });
   }
 

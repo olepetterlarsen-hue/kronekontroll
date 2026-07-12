@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Logo } from "@/components/marketing";
+import { AppNav } from "@/components/app/nav";
 import { LoggUtKnapp, StartBetalingKnapp } from "@/components/app/klient";
 import { harTilgang } from "@/lib/stripe";
 import { createClient } from "@/lib/supabase/server";
@@ -39,33 +40,20 @@ export default async function AppLayout({ children }: { children: React.ReactNod
 
   return (
     <div className="flex min-h-screen flex-col lg:flex-row">
-      {/* Sidemeny */}
+      {/* Sidemeny: to rader på mobil (logo + logg ut / scrollbar meny), kolonne på desktop */}
       <aside className="border-b border-linje bg-flate lg:w-60 lg:shrink-0 lg:border-b-0 lg:border-r">
-        <div className="flex items-center justify-between px-5 py-4 lg:block">
-          <Logo />
-          <div className="lg:mt-8">
-            <nav aria-label="Appmeny" className="flex gap-1 overflow-x-auto lg:flex-col">
-              {NAV.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="whitespace-nowrap rounded-xl px-3 py-2 text-sm font-medium text-demp transition-colors hover:bg-primar-lys hover:text-primar-mork"
-                >
-                  {item.label}
-                </Link>
-              ))}
-              {profile.is_admin ? (
-                <Link
-                  href="/admin"
-                  className="whitespace-nowrap rounded-xl px-3 py-2 text-sm font-medium text-aksent transition-colors hover:bg-aksent-lys"
-                >
-                  Admin
-                </Link>
-              ) : null}
-            </nav>
-            <div className="mt-2 lg:mt-8">
+        <div className="px-5 py-4">
+          <div className="flex items-center justify-between lg:block">
+            <Logo />
+            <div className="lg:hidden">
               <LoggUtKnapp />
             </div>
+          </div>
+          <div className="mt-3 lg:mt-8">
+            <AppNav lenker={NAV} visAdmin={Boolean(profile.is_admin)} />
+          </div>
+          <div className="mt-8 hidden lg:block">
+            <LoggUtKnapp />
           </div>
         </div>
       </aside>

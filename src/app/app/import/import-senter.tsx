@@ -79,13 +79,13 @@ export function ImportSenter() {
 
   if (fase.steg === "laster") {
     return (
-      <Kort className="py-16 text-center">
+      <Kort className="py-16 text-center"><div role="status">
         <div
           aria-hidden
           className="mx-auto h-10 w-10 animate-spin rounded-full border-4 border-primar-lys border-t-primar"
         />
         <p className="mt-4 font-semibold">Leser dokumentet …</p>
-        <p className="mt-1 text-sm text-demp">Dette tar vanligvis 15-60 sekunder.</p>
+        <p className="mt-1 text-sm text-demp">Dette tar vanligvis 15-60 sekunder.</p></div>
       </Kort>
     );
   }
@@ -101,7 +101,7 @@ export function ImportSenter() {
             : fase.docType === "inkasso"
               ? "Kravet ligger nå under Gjeld og frister, med kontrollresultat og oppgave for fristen."
               : fase.docType === "laan"
-                ? "Lånet ligger under Gjeld og frister, og renteradaren følger med på renta."
+                ? "Lånet ligger under Gjeld og frister, og renteradaren følger med på renten."
                 : "Eventuelle oppgaver fra e-posten ligger under Gjeld og frister."}
         </p>
         <div className="mt-6 flex justify-center gap-3">

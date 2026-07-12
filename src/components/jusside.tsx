@@ -16,7 +16,7 @@ export function JusSide({
       <main className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
         <h1 className="text-3xl font-bold sm:text-4xl">{tittel}</h1>
         <p className="mt-2 text-sm text-demp">Sist oppdatert {oppdatert}</p>
-        <div className="prose-ktr mt-8 space-y-6">{children}</div>
+        <div className="mt-8 space-y-6">{children}</div>
       </main>
       <MarketingFooter />
     </>

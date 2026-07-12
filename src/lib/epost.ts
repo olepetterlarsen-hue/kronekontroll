@@ -47,7 +47,7 @@ export async function sendVarsel(opts: {
 }
 
 export function fristVarselHtml(oppgave: { title: string; due_date: string }, dager: number): string {
-  const naar = dager <= 1 ? "i morgen" : `om ${dager} dager`;
+  const naar = dager <= 0 ? "i dag" : dager === 1 ? "i morgen" : `om ${dager} dager`;
   return `
     <h1 style="font-size:20px;margin:0 0 12px;">Frist ${naar}</h1>
     <p style="font-size:15px;line-height:1.6;margin:0 0 16px;">

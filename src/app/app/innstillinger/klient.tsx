@@ -57,7 +57,7 @@ export function VarslerSkjema({ verdier }: { verdier: Record<string, boolean> })
             type="checkbox"
             name={v.navn}
             defaultChecked={verdier[v.navn]}
-            className="mt-1 h-4 w-4 accent-[#0e5f58]"
+            className="mt-1 h-4 w-4 accent-primar"
           />
           <span>
             <span className="block text-sm font-medium">{v.tittel}</span>

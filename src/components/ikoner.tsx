@@ -4,11 +4,11 @@
  * fargene følger paletten i globals.css.
  */
 
-const PRIMAR = "#0e5f58";
-const PRIMAR_LYS = "#e2efec";
-const AKSENT = "#d96e48";
-const POSITIV = "#2f7d4f";
-const HVIT = "#ffffff";
+const PRIMAR = "var(--color-primar)";
+const PRIMAR_LYS = "var(--color-primar-lys)";
+const AKSENT = "var(--color-aksent)";
+const POSITIV = "var(--color-positiv)";
+const HVIT = "var(--color-flate)";
 
 function Ramme({ children, tittel }: { children: React.ReactNode; tittel: string }) {
   return (

@@ -119,7 +119,7 @@ export const guides: Guide[] = [
         ],
       },
     ],
-    cta: "Kronekontroll overvåker regningene dine, varsler deg før forfall og flagger krav som ser feil ut, slik at purringer og inkassovarsler stoppes før de oppstår.",
+    cta: "Kronekontroll overvåker regningene dine, varsler deg før forfall og flagger krav som ser feil ut, slik at du kan handle før det blir purring og inkassovarsel.",
   },
   {
     slug: "snoballmetoden-eller-skredmetoden",
@@ -215,7 +215,7 @@ export const guides: Guide[] = [
         ],
       },
       {
-        heading: "Kjenn rettighetene dine: angrerett og oppsigelsesvilkår",
+        heading: "Steg 4: Kjenn rettighetene dine - angrerett og oppsigelsesvilkår",
         paragraphs: [
           "Har du nylig tegnet et abonnement på nett eller telefon, har du som hovedregel fjorten dagers angrerett etter angrerettloven. Da kan du gå fra avtalen uten begrunnelse. Angreretten gjelder ved fjernsalg og salg utenfor fast utsalgssted, altså de fleste abonnementer du tegner hjemmefra.",
           "For eldre abonnementer gjelder oppsigelsesvilkårene i avtalen. Sjekk to ting: oppsigelsestiden, altså hvor lenge du må betale etter at du har sagt opp, og bindingstiden, om du i det hele tatt kan si opp nå. Vilkår som gjør det urimelig vanskelig å komme seg ut av en avtale, kan du klage på til Forbrukertilsynet. Og husk: en tjeneste som lot deg tegne abonnement med to klikk, skal ikke kreve et brev per post for å avslutte det.",
@@ -299,6 +299,6 @@ export const guides: Guide[] = [
         ],
       },
     ],
-    cta: "Kronekontroll følger med på lånene dine, sammenligner renten din mot markedet og gir deg ferdig utfylt forhandlings-epost når det er penger å hente.",
+    cta: "Kronekontroll følger med på lånene dine, sammenligner renten din mot markedet og gir deg ferdig utfylt forhandlings-e-post når det er penger å hente.",
   },
 ];

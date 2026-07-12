@@ -106,7 +106,7 @@ export function Felt({
 }
 
 export const inputKlasse =
-  "w-full rounded-xl border border-linje bg-flate px-3.5 py-2.5 text-sm text-blekk placeholder:text-demp/60 focus:border-primar focus:outline-none focus:ring-2 focus:ring-primar/20";
+  "w-full rounded-xl border border-linje bg-flate px-3.5 py-2.5 text-sm text-blekk placeholder:text-demp focus:border-primar focus:outline-none focus:ring-2 focus:ring-primar/20";
 
 export function StatKort({
   tittel,
