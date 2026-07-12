@@ -74,6 +74,18 @@ export const EpostSchema = z.object({
 
 export type EpostParsed = z.infer<typeof EpostSchema>;
 
+// ---------- Lønnsslipp ----------
+
+export const LonnsslippSchema = z.object({
+  arbeidsgiver: z.string().nullable(),
+  periode: z.string().nullable().describe("Lønnsperioden på format YYYY-MM, eller null"),
+  bruttolonn: z.number().describe("Bruttolønn for perioden i NOK"),
+  nettoUtbetalt: z.number().describe("Netto utbetalt i NOK"),
+  skattetrekk: z.number().nullable(),
+});
+
+export type LonnsslippParsed = z.infer<typeof LonnsslippSchema>;
+
 // ---------- E-postutkast (verkstedet) ----------
 
 export const UtkastSchema = z.object({
@@ -100,5 +112,5 @@ export const GenererUtkastInput = z.object({
   belop: z.number().optional(),
 });
 
-export const DokumentTypeSchema = z.enum(["kontoutskrift", "inkasso", "laan", "epost"]);
+export const DokumentTypeSchema = z.enum(["kontoutskrift", "inkasso", "laan", "epost", "lonnsslipp"]);
 export type DokumentType = z.infer<typeof DokumentTypeSchema>;

@@ -17,6 +17,7 @@ const NAV = [
   { href: "/app", label: "Oversikt" },
   { href: "/app/import", label: "Importer" },
   { href: "/app/gjeld", label: "Gjeld og frister" },
+  { href: "/app/kjop", label: "Kjøpsplan" },
   { href: "/app/epost", label: "E-postverksted" },
   { href: "/app/sparemaal", label: "Sparemål" },
   { href: "/app/innstillinger", label: "Innstillinger" },

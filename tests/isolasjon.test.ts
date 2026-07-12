@@ -38,6 +38,8 @@ const BRUKERTABELLER = [
   "savings_goals",
   "tasks",
   "email_drafts",
+  "payslips",
+  "purchase_plans",
 ] as const;
 
 /** Minimal gyldig rad per tabell (user_id settes i testen). */
@@ -49,6 +51,8 @@ const TESTRADER: Record<(typeof BRUKERTABELLER)[number], Record<string, unknown>
   savings_goals: { name: "Buffer", target_amount: 30000 },
   tasks: { title: "Testoppgave" },
   email_drafts: { template_type: "betalingsplan", subject: "Test", body: "Test" },
+  payslips: { gross_pay: 45000, net_pay: 32000 },
+  purchase_plans: { title: "Testbil", price: 150000, monthly_saving: 2000 },
 };
 
 describe.runIf(kanKjore)("Tenant-isolasjon: bruker B når aldri bruker As data", () => {

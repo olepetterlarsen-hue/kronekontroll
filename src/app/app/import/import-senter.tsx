@@ -5,13 +5,14 @@ import { useRouter } from "next/navigation";
 import { Etikett, Knapp, Kort, inputKlasse } from "@/components/ui";
 import { kr } from "@/lib/format";
 import { KATEGORI_NAVN, type Kategori } from "@/lib/kategorier";
-import type { EpostParsed, InkassoParsed, Kontoutskrift, LaanParsed, DokumentType } from "@/lib/schemas";
+import type { EpostParsed, InkassoParsed, Kontoutskrift, LaanParsed, LonnsslippParsed, DokumentType } from "@/lib/schemas";
 
 const TYPER: { id: DokumentType; navn: string; beskrivelse: string }[] = [
   { id: "kontoutskrift", navn: "Kontoutskrift", beskrivelse: "PDF eller CSV fra banken" },
   { id: "inkasso", navn: "Inkasso eller purring", beskrivelse: "Brev eller varsel du har fått" },
   { id: "laan", navn: "Låneavtale", beskrivelse: "Lånedokumenter og avtaler" },
   { id: "epost", navn: "E-post", beskrivelse: "Lim inn eller last opp .eml" },
+  { id: "lonnsslipp", navn: "Lønnsslipp", beskrivelse: "PDF fra arbeidsgiver" },
 ];
 
 type Fase =
@@ -102,7 +103,9 @@ export function ImportSenter() {
               ? "Kravet ligger nå under Gjeld og frister, med kontrollresultat og oppgave for fristen."
               : fase.docType === "laan"
                 ? "Lånet ligger under Gjeld og frister, og renteradaren følger med på renten."
-                : "Eventuelle oppgaver fra e-posten ligger under Gjeld og frister."}
+                : fase.docType === "lonnsslipp"
+                  ? "Inntekten er registrert og brukes i Kjøpsplanleggeren og oversikten."
+                  : "Eventuelle oppgaver fra e-posten ligger under Gjeld og frister."}
         </p>
         <div className="mt-6 flex justify-center gap-3">
           <Knapp onClick={() => { setTekst(""); setFase({ steg: "velg" }); }}>Importer flere</Knapp>
@@ -134,7 +137,7 @@ export function ImportSenter() {
   return (
     <div className="space-y-5">
       {/* Typevelger */}
-      <div className="grid gap-3 sm:grid-cols-4">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
         {TYPER.map((t) => (
           <button
             key={t.id}
@@ -285,6 +288,19 @@ function Forhaandsvisning({ docType, parsed }: { docType: DokumentType; parsed: 
         <Rad navn="Nominell rente" verdi={data.nominellRente != null ? `${data.nominellRente} %` : "-"} />
         <Rad navn="Effektiv rente" verdi={data.effektivRente != null ? `${data.effektivRente} %` : "-"} />
         <Rad navn="Terminbeløp" verdi={data.terminbelop != null ? kr(data.terminbelop) : "-"} />
+      </dl>
+    );
+  }
+
+  if (docType === "lonnsslipp") {
+    const data = parsed as LonnsslippParsed;
+    return (
+      <dl className="grid gap-3 text-sm sm:grid-cols-2">
+        <Rad navn="Arbeidsgiver" verdi={data.arbeidsgiver ?? "-"} />
+        <Rad navn="Periode" verdi={data.periode ?? "-"} />
+        <Rad navn="Bruttolønn" verdi={kr(data.bruttolonn)} />
+        <Rad navn="Netto utbetalt" verdi={kr(data.nettoUtbetalt)} />
+        <Rad navn="Skattetrekk" verdi={data.skattetrekk != null ? kr(data.skattetrekk) : "-"} />
       </dl>
     );
   }

@@ -7,6 +7,7 @@ import {
   InkassoSchema,
   KontoutskriftSchema,
   LaanSchema,
+  LonnsslippSchema,
 } from "@/lib/schemas";
 
 const ConfirmInput = z.object({ documentId: z.string().uuid() });
@@ -100,6 +101,18 @@ export async function POST(request: NextRequest) {
         monthly_payment: parsed.terminbelop,
       });
       if (error) return Response.json({ error: "Kunne ikke lagre lånet" }, { status: 500 });
+    } else if (doc.doc_type === "lonnsslipp") {
+      const parsed = LonnsslippSchema.parse(doc.parsed);
+      const { error } = await supabase.from("payslips").insert({
+        user_id: user.id,
+        document_id: doc.id,
+        employer: parsed.arbeidsgiver,
+        period: parsed.periode,
+        gross_pay: parsed.bruttolonn,
+        net_pay: parsed.nettoUtbetalt,
+        tax_withheld: parsed.skattetrekk,
+      });
+      if (error) return Response.json({ error: "Kunne ikke lagre lønnsslippen" }, { status: 500 });
     } else if (doc.doc_type === "epost") {
       const parsed = EpostSchema.parse(doc.parsed);
       if (parsed.foreslattOppgave) {

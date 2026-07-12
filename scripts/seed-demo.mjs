@@ -123,6 +123,31 @@ await insert("savings_goals", [
   { user_id: uid, name: "Sommerferie", target_amount: 15000, saved_amount: 3200, target_date: omDager(330) },
 ]);
 
+// ---- Lønnsslipp ----
+await insert("payslips", [
+  {
+    user_id: uid,
+    employer: "Arbeidsgiver AS",
+    period: mnd(1).slice(0, 7),
+    gross_pay: 48500,
+    net_pay: 34500,
+    tax_withheld: 14000,
+  },
+]);
+
+// ---- Kjøpsplan ----
+await insert("purchase_plans", [
+  {
+    user_id: uid,
+    title: "Toyota RAV4 Hybrid 2019",
+    price: 289000,
+    monthly_saving: 3500,
+    already_saved: 45000,
+    is_vehicle: true,
+    vehicle_info: { aarsmodell: 2019, km: 78000, drivstoff: "hybrid" },
+  },
+]);
+
 // ---- Eksempel-utkast i e-postverkstedet ----
 await insert("email_drafts", [
   {

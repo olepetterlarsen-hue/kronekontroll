@@ -8,6 +8,7 @@ import {
   InkassoSchema,
   KontoutskriftSchema,
   LaanSchema,
+  LonnsslippSchema,
   UtkastSchema,
   type DokumentType,
   type MalType,
@@ -55,6 +56,9 @@ hovedstol, nominell og effektiv rente og terminbeløp.`,
   epost: `${FELLES_INSTRUKS}
 Dette er en e-post brukeren har mottatt. Oppsummer hva den gjelder på norsk,
 og finn eventuelle beløp og frister. Foreslå en kort oppgave hvis brukeren bør foreta seg noe.`,
+  lonnsslipp: `${FELLES_INSTRUKS}
+Dokumentet er en lønnsslipp. Trekk ut arbeidsgiver, lønnsperiode, bruttolønn,
+netto utbetalt og skattetrekk. Bruk beløpene for selve perioden, ikke hittil i år.`,
 };
 
 const PARSE_SCHEMAS = {
@@ -62,13 +66,15 @@ const PARSE_SCHEMAS = {
   inkasso: InkassoSchema,
   laan: LaanSchema,
   epost: EpostSchema,
+  lonnsslipp: LonnsslippSchema,
 } as const;
 
 export type ParsedDokument =
   | { docType: "kontoutskrift"; data: z.infer<typeof KontoutskriftSchema> }
   | { docType: "inkasso"; data: z.infer<typeof InkassoSchema> }
   | { docType: "laan"; data: z.infer<typeof LaanSchema> }
-  | { docType: "epost"; data: z.infer<typeof EpostSchema> };
+  | { docType: "epost"; data: z.infer<typeof EpostSchema> }
+  | { docType: "lonnsslipp"; data: z.infer<typeof LonnsslippSchema> };
 
 /**
  * Tolker ett dokument. `innhold` er enten en PDF (base64) eller ren tekst (CSV/e-post).
